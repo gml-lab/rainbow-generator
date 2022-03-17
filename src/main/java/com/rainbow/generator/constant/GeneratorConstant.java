@@ -35,6 +35,11 @@ public interface GeneratorConstant {
      * service impl文件类型后缀
      */
     String SERVICEIMPL_FILE_SUFFIX = "ServiceImpl.java";
+
+    String ENTITY_PARAM_SUFFIX="Param.java";
+
+    String ENTITY_RESULT_SUFFIX="Result.java";
+
     /**
      * controller文件类型后缀
      */
@@ -64,6 +69,11 @@ public interface GeneratorConstant {
      * service impl接口模板
      */
     String SERVICEIMPL_TEMPLATE = "serviceImpl.ftl";
+
+    String PARAM_TEMPLATE="param.ftl";
+
+    String RESULT_TEMPLATE="result.ftl";
+
     /**
      * controller接口模板
      */

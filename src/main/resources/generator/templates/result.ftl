@@ -1,4 +1,4 @@
-package ${basePackage}.${entityPackage};
+package ${basePackage}.${resultPackage};
 
 <#if hasDate = true>
 import java.util.Date;
@@ -7,10 +7,6 @@ import java.util.Date;
 import java.math.BigDecimal;
 </#if>
 import lombok.Data;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.EqualsAndHashCode;
 /**
@@ -21,20 +17,13 @@ import lombok.EqualsAndHashCode;
 */
 @Data
 @EqualsAndHashCode
-@TableName("${tableName}")
-public class ${className} implements Serializable{
-
+public class ${className}Result implements Serializable{
 <#if columns??>
     <#list columns as column>
 
     /**
      * ${column.remark}
      */
-    <#if column.isKey = true>
-    @TableField("${column.name}")
-    <#else>
-    @TableField("${column.name}")
-    </#if>
     <#if (column.type = 'varchar' || column.type = 'text' || column.type = 'uniqueidentifier'
     || column.type = 'varchar2' || column.type = 'nvarchar' || column.type = 'VARCHAR2'
     || column.type = 'VARCHAR'|| column.type = 'CLOB' || column.type = 'char')>

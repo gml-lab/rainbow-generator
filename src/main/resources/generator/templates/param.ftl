@@ -1,4 +1,4 @@
-package ${basePackage}.${entityPackage};
+package ${basePackage}.${paramPackage};
 
 <#if hasDate = true>
 import java.util.Date;
@@ -6,13 +6,11 @@ import java.util.Date;
 <#if hasBigDecimal = true>
 import java.math.BigDecimal;
 </#if>
+import com.honyar.iot.base.core.pojo.base.param.BaseParam;
 import lombok.Data;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.EqualsAndHashCode;
+import javax.validation.constraints.NotNull;
+
 /**
 *  @Description ${tableComment!} 实体
 *
@@ -20,21 +18,14 @@ import lombok.EqualsAndHashCode;
 *  @Date ${.now}
 */
 @Data
-@EqualsAndHashCode
-@TableName("${tableName}")
-public class ${className} implements Serializable{
-
+@EqualsAndHashCode(callSuper = true)
+public class ${className}Param extends BaseParam{
 <#if columns??>
     <#list columns as column>
 
     /**
      * ${column.remark}
      */
-    <#if column.isKey = true>
-    @TableField("${column.name}")
-    <#else>
-    @TableField("${column.name}")
-    </#if>
     <#if (column.type = 'varchar' || column.type = 'text' || column.type = 'uniqueidentifier'
     || column.type = 'varchar2' || column.type = 'nvarchar' || column.type = 'VARCHAR2'
     || column.type = 'VARCHAR'|| column.type = 'CLOB' || column.type = 'char')>
@@ -58,6 +49,7 @@ public class ${className} implements Serializable{
     <#if column.type = 'decimal' || column.type = 'numeric'>
     private BigDecimal ${column.field?uncap_first};
     </#if>
+
     </#list>
 </#if>
 }

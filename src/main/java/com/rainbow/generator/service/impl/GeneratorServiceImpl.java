@@ -90,7 +90,9 @@ public class GeneratorServiceImpl implements GeneratorService {
         generatorHelper.generateServiceFile(columns, generatorConfig);
         generatorHelper.generateServiceImplFile(columns, generatorConfig);
         generatorHelper.generateControllerFile(columns, generatorConfig);
-        generatorHelper.generateSwaggerFile(columns, generatorConfig);
+        //generatorHelper.generateSwaggerFile(columns, generatorConfig);
+        generatorHelper.generateParamFile(columns,generatorConfig);
+        generatorHelper.generateResultFile(columns,generatorConfig);
         // 打包
         String zipFile = System.currentTimeMillis() + GeneratorConstant.SUFFIX;
         FileUtil.compress(GeneratorConstant.TEMP_PATH + "src", zipFile);

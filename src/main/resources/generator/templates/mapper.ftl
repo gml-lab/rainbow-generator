@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 /**
-*  @Description ${tableComment!} 持久层接口
+*  @Description ${tableComment!} Mapper 接口
+*
 *  @author ${author}
 *  @Date ${.now}
 */

@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "rainbow.generator")
-@PropertySource(value = "classpath:Generator.properties",encoding = "UTF-8")
+@PropertySource(value = {"classpath:Generator.properties"},encoding = "GBK")
 public class GeneratorProperties {
     private String author;
 
@@ -90,5 +90,17 @@ public class GeneratorProperties {
      * swagger文件存放路径
      */
     private String swaggerPackage;
+
+    private String path1;
+
+    private String path2;
+
+    private String path3;
+
+    private String paramPackage;
+
+    private String resultPackage;
+
+    private String modelPackage;
 
 }

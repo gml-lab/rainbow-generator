@@ -111,6 +111,50 @@ public class GeneratorHelper {
         generateFileByTemplate(templateName, serviceImplFile, toJsonObject(configure));
     }
 
+    public void generateParamFile(List<Column> columns, GeneratorConfig configure) throws Exception {
+        String suffix = GeneratorConstant.ENTITY_PARAM_SUFFIX;
+        String path = getFilePath(configure, configure.getParamPackage(), suffix, false,false);
+        String templateName = GeneratorConstant.PARAM_TEMPLATE;
+        File paramFile = new File(path);
+        JSONObject data = toJsonObject(configure);
+        data.put("hasDate", false);
+        data.put("hasBigDecimal", false);
+        // 属性转换
+        columns.forEach(c -> {
+            c.setField(GeneratorUtil.underscoreToCamel(StringUtils.lowerCase(c.getName())));
+            if (StringUtils.containsAny(c.getType(), GeneratorConstant.DATE, GeneratorConstant.DATETIME, GeneratorConstant.TIMESTAMP)) {
+                data.put("hasDate", true);
+            }
+            if (StringUtils.containsAny(c.getType(), GeneratorConstant.DECIMAL, GeneratorConstant.NUMERIC)) {
+                data.put("hasBigDecimal", true);
+            }
+        });
+        data.put("columns", columns);
+        generateFileByTemplate(templateName, paramFile, data);
+    }
+
+    public void generateResultFile(List<Column> columns, GeneratorConfig configure) throws Exception {
+        String suffix = GeneratorConstant.ENTITY_RESULT_SUFFIX;
+        String path = getFilePath(configure, configure.getResultPackage(), suffix, false,false);
+        String templateName = GeneratorConstant.RESULT_TEMPLATE;
+        File resultFile = new File(path);
+        JSONObject data = toJsonObject(configure);
+        data.put("hasDate", false);
+        data.put("hasBigDecimal", false);
+        // 属性转换
+        columns.forEach(c -> {
+            c.setField(GeneratorUtil.underscoreToCamel(StringUtils.lowerCase(c.getName())));
+            if (StringUtils.containsAny(c.getType(), GeneratorConstant.DATE, GeneratorConstant.DATETIME, GeneratorConstant.TIMESTAMP)) {
+                data.put("hasDate", true);
+            }
+            if (StringUtils.containsAny(c.getType(), GeneratorConstant.DECIMAL, GeneratorConstant.NUMERIC)) {
+                data.put("hasBigDecimal", true);
+            }
+        });
+        data.put("columns", columns);
+        this.generateFileByTemplate(templateName, resultFile, data);
+    }
+
     public void generateControllerFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.CONTROLLER_FILE_SUFFIX;
         String path = getFilePath(configure, configure.getControllerPackage(), suffix, false,false);

@@ -6,10 +6,10 @@ spring:
     name: rainbow-generator
 
   datasource:
-    username: root
-    password: 123456
+    username: honyar
+    password: '*honyar123456#'
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.132.105.134:3306/rainbow?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://rm-uf670w71rw14ib5yd6o.mysql.rds.aliyuncs.com:3306/ibs?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT&allowMultiQueries=true
 
 
 mybatis-plus:

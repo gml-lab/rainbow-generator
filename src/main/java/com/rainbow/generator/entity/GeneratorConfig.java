@@ -84,6 +84,18 @@ public class GeneratorConfig {
     @ApiModelProperty(name = "serviceImplPackage",value = "serviceImpl文件存放路径")
     private String serviceImplPackage;
 
+    @TableField("param_package")
+    @ApiModelProperty(name = "paramPackage",value = "paramPackage文件存放路径")
+    private String paramPackage;
+
+    @TableField("result_package")
+    @ApiModelProperty(name = "resultPackage",value = "resultPackage文件存放路径")
+    private String resultPackage;
+
+    @TableField("model_package")
+    @ApiModelProperty(name = "modelPackage",value = "modelPackage文件存放路径")
+    private String modelPackage;
+
     /**
      * controller文件存放路径
      */
@@ -152,5 +164,19 @@ public class GeneratorConfig {
     @TableField(exist = false)
     @ApiModelProperty(name = "className",value = "数据表对应的类名")
     private  String className;
+
+    @TableField("path1")
+    @ApiModelProperty(name = "path1",value = "路径1")
+    private String path1;
+
+    @TableField("path2")
+    @ApiModelProperty(name = "path2",value = "路径2")
+    private String path2;
+
+    @TableField("path3")
+    @ApiModelProperty(name = "path3",value = "路径3")
+    private String path3;
+
+
 
 }
