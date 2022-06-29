@@ -66,10 +66,29 @@ public class GeneratorProperties {
      * java文件路径，固定值
      */
     private  String javaPath;
+
+    /**
+     * feign文件路径
+     */
+    private String feignPath;
     /**
      * 配置文件存放路径，固定值
      */
     private  String resourcesPath;
+
+    /**
+     * 生成文件java文件存放路径，固定值
+     */
+    private String javaFilePath;
+
+    /**
+     * 生成文件feign文件存放路径，固定值
+     */
+    private String feignFilePath;
+
+    private String resourcesFilePath;
+
+    private String baseGeneratorPackage;
 
     /**
      * 数据库名称

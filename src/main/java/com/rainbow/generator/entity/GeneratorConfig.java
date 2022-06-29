@@ -50,6 +50,13 @@ public class GeneratorConfig {
     private String basePackage;
 
     /**
+     * 生成文件基础包名
+     */
+    @TableField(exist = false)
+    @ApiModelProperty(name = "baseGeneratorPackage",value = "生成文件基础包名")
+    private String baseGeneratorPackage;
+
+    /**
      * entity文件存放路径
      */
     @TableField("entity_package")
@@ -136,6 +143,35 @@ public class GeneratorConfig {
     @TableField(exist = false)
     @ApiModelProperty(name = "resourcesPath",value = "配置文件存放路径，固定值")
     private  String resourcesPath = "src/main/resources";
+
+    /**
+     * 配置文件存放路径，固定值
+     */
+    @TableField(exist = false)
+    @ApiModelProperty(name = "feignPath",value = "feign中parem，result文件存放路径，固定值")
+    private  String feignPath = "src/main/feign";
+
+    /**
+     * java文件存放路径，固定值
+     */
+    @TableField(exist = false)
+    @ApiModelProperty(name = "javaPath",value = " java文件存放路径，固定值")
+    private  String javaFilePath = "src/java/";
+
+    /**
+     * feign文件存放路径，固定值
+     */
+    @TableField(exist = false)
+    @ApiModelProperty(name = "resourcesFilePath",value = " resources文件存放路径，固定值")
+    private  String resourcesFilePath = "src/java/";
+
+    /**
+     * feign文件存放路径，固定值
+     */
+    @TableField(exist = false)
+    @ApiModelProperty(name = "feignFilePath",value = " feign文件存放路径，固定值")
+    private  String feignFilePath = "src/feign/";
+
 
     /**
      * 表名

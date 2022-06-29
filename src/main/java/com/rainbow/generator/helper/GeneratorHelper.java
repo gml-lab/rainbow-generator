@@ -66,13 +66,49 @@ public class GeneratorHelper {
         return filePath;
     }
 
+    /**
+     * @description: TODO 临时获取param、result文件路径
+     * @author gml
+     * @date 2022/6/29 10:21
+     * @version 1.0
+     */
+    private static String getParmaResultFilePath(GeneratorConfig configure, String packagePath, String suffix,boolean xml,boolean swagger) {
+        String filePath = "";
+        filePath = GeneratorConstant.TEMP_PATH + configure.getFeignFilePath() +
+                packageConvertPath(configure.getBaseGeneratorPackage() + "." + packagePath);
+        filePath += configure.getClassName() + suffix;
+        return filePath;
+    }
+    /**
+     * @description: TODO 获取文件路径适配，文件夹路径太深，自己修改的
+     * @author gml
+     * @date 2022/6/29 10:59
+     * @version 1.0
+     */
+    private static String getFilePathAdapt(GeneratorConfig configure, String packagePath, String suffix,boolean xml,boolean swagger) {
+        String filePath = "";
+        if(xml){
+            filePath = GeneratorConstant.TEMP_PATH + configure.getResourcesFilePath() +
+                    packageConvertPath(configure.getBaseGeneratorPackage() + "." + packagePath);
+        }else {
+            filePath = GeneratorConstant.TEMP_PATH + configure.getJavaFilePath() +
+                    packageConvertPath(configure.getBaseGeneratorPackage() + "." + packagePath);
+        }
+        if(swagger){
+            filePath += suffix;
+        }else {
+            filePath += configure.getClassName() + suffix;
+        }
+        return filePath;
+    }
+
     private static String packageConvertPath(String packageName) {
         return String.format("/%s/", packageName.contains(".") ? packageName.replaceAll("\\.", "/") : packageName);
     }
 
     public void generateEntityFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.JAVA_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getEntityPackage(), suffix, false,false);
+        String path = getFilePathAdapt(configure, configure.getEntityPackage(), suffix, false,false);
         String templateName = GeneratorConstant.ENTITY_TEMPLATE;
         File entityFile = new File(path);
         JSONObject data = toJsonObject(configure);
@@ -94,7 +130,7 @@ public class GeneratorHelper {
 
     public void generateMapperFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.MAPPER_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getMapperPackage(), suffix, false,false);
+        String path = getFilePathAdapt(configure, configure.getMapperPackage(), suffix, false,false);
         String templateName = GeneratorConstant.MAPPER_TEMPLATE;
         File mapperFile = new File(path);
         generateFileByTemplate(templateName, mapperFile, toJsonObject(configure));
@@ -102,7 +138,7 @@ public class GeneratorHelper {
 
     public void generateServiceFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.SERVICE_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getServicePackage(), suffix, false,false);
+        String path = getFilePathAdapt(configure, configure.getServicePackage(), suffix, false,false);
         String templateName = GeneratorConstant.SERVICE_TEMPLATE;
         File serviceFile = new File(path);
         generateFileByTemplate(templateName, serviceFile, toJsonObject(configure));
@@ -110,7 +146,7 @@ public class GeneratorHelper {
 
     public void generateServiceImplFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.SERVICEIMPL_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getServiceImplPackage(), suffix, false,false);
+        String path = getFilePathAdapt(configure, configure.getServiceImplPackage(), suffix, false,false);
         String templateName = GeneratorConstant.SERVICEIMPL_TEMPLATE;
         File serviceImplFile = new File(path);
         generateFileByTemplate(templateName, serviceImplFile, toJsonObject(configure));
@@ -118,7 +154,7 @@ public class GeneratorHelper {
 
     public void generateParamFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.ENTITY_PARAM_SUFFIX;
-        String path = getFilePath(configure, configure.getParamPackage(), suffix, false,false);
+        String path = getParmaResultFilePath(configure, configure.getParamPackage(), suffix, false,false);
         String templateName = GeneratorConstant.PARAM_TEMPLATE;
         File paramFile = new File(path);
         JSONObject data = toJsonObject(configure);
@@ -140,7 +176,7 @@ public class GeneratorHelper {
 
     public void generateResultFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.ENTITY_RESULT_SUFFIX;
-        String path = getFilePath(configure, configure.getResultPackage(), suffix, false,false);
+        String path = getParmaResultFilePath(configure, configure.getResultPackage(), suffix, false,false);
         String templateName = GeneratorConstant.RESULT_TEMPLATE;
         File resultFile = new File(path);
         JSONObject data = toJsonObject(configure);
@@ -162,7 +198,7 @@ public class GeneratorHelper {
 
     public void generateControllerFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.CONTROLLER_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getControllerPackage(), suffix, false,false);
+        String path = getFilePathAdapt(configure, configure.getControllerPackage(), suffix, false,false);
 
         String path3 = generatorProperties.getPath3();
         String templateName = GeneratorConstant.CONTROLLER_TEMPLATE;
@@ -175,7 +211,7 @@ public class GeneratorHelper {
 
     public void generateMapperXmlFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.MAPPERXML_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getMapperXmlPackage(), suffix, true,false);
+        String path = getFilePathAdapt(configure, configure.getMapperXmlPackage(), suffix, true,false);
         String templateName = GeneratorConstant.MAPPERXML_TEMPLATE;
         File mapperXmlFile = new File(path);
         JSONObject data = toJsonObject(configure);
