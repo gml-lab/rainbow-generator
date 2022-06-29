@@ -80,6 +80,10 @@ public interface GeneratorConstant {
     String CONTROLLER_TEMPLATE = "controller.ftl";
 
     /**
+     * controller接口模板2（接口路径变短特殊处理）
+     */
+    String CONTROLLER_TEMPLATE2= "controller2.ftl";
+    /**
      * controller接口模板
      */
     String SWAGGER_TEMPLATE = "swagger.ftl";

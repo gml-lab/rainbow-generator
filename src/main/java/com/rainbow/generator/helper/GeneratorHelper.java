@@ -6,6 +6,7 @@ import com.google.common.io.Files;
 import com.rainbow.generator.constant.GeneratorConstant;
 import com.rainbow.generator.entity.Column;
 import com.rainbow.generator.entity.GeneratorConfig;
+import com.rainbow.generator.properties.GeneratorProperties;
 import com.rainbow.generator.util.GeneratorUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -18,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -32,6 +34,9 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class GeneratorHelper {
+
+    @Resource
+    private GeneratorProperties generatorProperties;
 
     /**
      * @Description 获得生成文件路径
@@ -158,7 +163,12 @@ public class GeneratorHelper {
     public void generateControllerFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.CONTROLLER_FILE_SUFFIX;
         String path = getFilePath(configure, configure.getControllerPackage(), suffix, false,false);
+
+        String path3 = generatorProperties.getPath3();
         String templateName = GeneratorConstant.CONTROLLER_TEMPLATE;
+        if (null == path3 || "".equals(path3)) {
+            templateName = GeneratorConstant.CONTROLLER_TEMPLATE2;
+        }
         File controllerFile = new File(path);
         generateFileByTemplate(templateName, controllerFile, toJsonObject(configure));
     }
